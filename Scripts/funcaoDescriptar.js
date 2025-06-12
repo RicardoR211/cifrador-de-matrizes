@@ -1,12 +1,12 @@
 // --- 1. CONFIGURAÇÕES GLOBAIS (AS MESMAS DO SEU CODIFICADOR) ---
 
-// Sua matriz-chave (apenas para referência, a decodificação usa a inversa)
+// Sua matriz-chave
 const matrizChave = [
     [3, 5],
     [2, 7]
 ];
 
-// Matriz Inversa (calculada a partir da sua matrizChave original)
+// Matriz Inversa
 const matrizInversa = [
     [8, 2],
     [17, 15]
@@ -18,20 +18,19 @@ const letraParaNumero = {
     'J': 10, 'K': 11, 'L': 12, 'M': 13, 'N': 14, 'O': 15, 'P': 16, 'Q': 17,
     'R': 18, 'S': 19, 'T': 20, 'U': 21, 'V': 22, 'W': 23, 'X': 24, 'Y': 25,
     'Z': 26,
-    '-': 27, // Hífen
-    ' ': 27  // Espaço (se seu sistema interpreta espaços como hífens internamente)
+    '-': 27,
+    ' ': 27
 };
 
-// Mapeamento de Número para Letra (para a saída decifrada)
+// Mapeamento de Número para Letra
 const numeroParaLetra = {
     1: 'A', 2: 'B', 3: 'C', 4: 'D', 5: 'E', 6: 'F', 7: 'G', 8: 'H', 9: 'I',
     10: 'J', 11: 'K', 12: 'L', 13: 'M', 14: 'N', 15: 'O', 16: 'P', 17: 'Q',
     18: 'R', 19: 'S', 20: 'T', 21: 'U', 22: 'V', 23: 'W', 24: 'X', 25: 'Y',
     26: 'Z',
-    27: '-' // Usamos hífen para 27, mas você pode mudar para ' ' se preferir ver espaços
+    27: '-'
 };
 
-// Sua função aplicarModulo27 corrigida (crucial para o sistema de 1 a 27)
 function aplicarModulo27(num) {
     let resultado = num % 27;
     if (resultado === 0) {
@@ -91,13 +90,12 @@ export function decodificarMensagem(mensagemCifrada) {
     // 3. Decodificar cada bloco
     blocosCifrados.forEach(bloco => {
         // MatrizInversa * BlocoCifrado (vetor coluna)
-        const x = bloco[0]; // Primeiro número do par cifrado
-        const y = bloco[1]; // Segundo número do par cifrado
+        const x = bloco[0];
+        const y = bloco[1];
 
         const celula1 = (matrizInversa[0][0] * x) + (matrizInversa[0][1] * y);
         const celula2 = (matrizInversa[1][0] * x) + (matrizInversa[1][1] * y);
 
-        // Aplicar módulo 27 (sua versão corrigida) aos resultados
         const decifrado1 = aplicarModulo27(celula1);
         const decifrado2 = aplicarModulo27(celula2);
 
